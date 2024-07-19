@@ -1,0 +1,44 @@
+﻿@model C__Cumulative_Part_1.Models.Teacher
+@{
+    ViewBag.Title = "Show";
+}
+
+<a class="navlink" href="/Teacher/List">Back To Teachers</a>
+<div id="containershow">
+    <style>
+        table {
+            border: 1px solid black;
+            width: 100%;
+            padding: 10px;
+        }
+
+        th,td {
+            border: 1px solid black;
+        }
+    </style>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>First Name</th>
+                <th>Lastname</th>
+                <th>employeenumber</th>
+                <th>hiredate</th>
+                <th>salary</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.teacherid</td>
+                <td>@Model.teacherfname</td>
+                <td>@Model.teacherlname</td>
+                <td>@Model.employeenumber</td>
+                <td>@Model.hiredate</td>
+                <td>@Model.salary</td>
+
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
