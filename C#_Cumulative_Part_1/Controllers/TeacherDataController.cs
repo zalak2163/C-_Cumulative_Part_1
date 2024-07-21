@@ -43,7 +43,7 @@ namespace C__Cumulative_Part_1.Controllers
 			//Gather Result Set of Query into a variable
 			MySqlDataReader ResultSet = cmd.ExecuteReader();
 
-			//Create an empty list of Authors
+			//Create an empty list of Teachers
 			List<Teacher> Teacher = new List<Teacher> {};
 
 			//Loop Through Each Row the Result Set
@@ -56,7 +56,8 @@ namespace C__Cumulative_Part_1.Controllers
 				string teacherlname = ResultSet["teacherlname"].ToString();
 				string employeenumber = ResultSet["employeenumber"].ToString();
 				string hiredate = ResultSet["hiredate"].ToString();
-				string salary = ResultSet["salary"].ToString();
+				string salary = ResultSet["salary" +
+					""].ToString();
 
 
 				Teacher Newteacher = new Teacher();
@@ -67,14 +68,14 @@ namespace C__Cumulative_Part_1.Controllers
 				Newteacher.hiredate = hiredate;
 				Newteacher.salary = salary;
 
-				//Add the Author Name to the List
+				//Add the Teacher Name to the List
 				Teacher.Add(Newteacher);
 
 			}
 			//Close the connection between the MySQL Database and the WebServer
 			Conn.Close();
 
-			//Return the final list of author names
+			//Return the final list of Teacher names
 			return Teacher;
 		}
 
