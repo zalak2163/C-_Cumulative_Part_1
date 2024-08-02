@@ -4,6 +4,7 @@
 }
 
 <a class="navlink" href="/Teacher/List">Back To Teachers</a>
+<a class="dellink" href="/Teacher/DeleteConfirm/@Model.teacherid">Delete</a>
 <div id="containershow">
     <style>
         table {
@@ -12,10 +13,22 @@
             padding: 10px;
         }
 
-        th,td {
+        th, td {
             border: 1px solid black;
         }
+        .dellink {
+            display:flow;
+            font-weight: Bold;
+            font-size: 22px;
+            text-decoration: none;
+            color: red;
+        }
+        .navlink{
+            text-decoration:none;
+            font-size:22px;
+        }
     </style>
+
     <table>
         <thead>
             <tr>

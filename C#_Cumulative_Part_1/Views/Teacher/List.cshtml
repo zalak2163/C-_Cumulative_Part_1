@@ -7,6 +7,9 @@
 <p>This page should be showing information about all Teachers</p>
 
 <div id="containerlist">
+    <nav>
+        <a class="navlink" href="/Teacher/New">New Teacher</a>
+    </nav>
     <h2>List of Teacher</h2>
     <form action="/Teacher/List" method="GET">
         <input type="text" autocomplte="off" name="SearchKey">
@@ -15,9 +18,13 @@
     @foreach (var Teacher in Model)
     {
         <div class="listitem row">
-            <div class="col-md-12"><a href="/Teacher/Show/@Teacher.teacherid">@Teacher.teacherfname 
-                @Teacher.teacherlname </a></div>
+            <div class="col-md-12">
+                <a href="/Teacher/Show/@Teacher.teacherid">
+                    @Teacher.teacherfname
+                @Teacher.teacherlname
+            </a>
         </div>
-    }
+    </div>
+}
 </div>
 
