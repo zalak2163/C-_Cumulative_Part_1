@@ -39,6 +39,7 @@ namespace C__Cumulative_Part_1.Controllers
 
 			//SQL QUERY
 			
+
 			cmd.CommandText = "Select * from teachers where lower(teacherfname) like lower(@key) or lower(teacherlname) like lower(@key) or lower(concat(teacherfname, ' ', teacherlname)) like lower(@key)";
 			cmd.Parameters.AddWithValue("@key", "%" + SearchKey + "%");
 
@@ -57,9 +58,8 @@ namespace C__Cumulative_Part_1.Controllers
 				string teacherfname = ResultSet["teacherfname"].ToString();
 				string teacherlname = ResultSet["teacherlname"].ToString();
 				string employeenumber = ResultSet["employeenumber"].ToString();
-				string hiredate = ResultSet["hiredate"].ToString();
-				string salary = ResultSet["salary" +
-					""].ToString();
+				DateTime hiredate = (DateTime)ResultSet["hiredate"];
+				decimal salary = Convert.ToDecimal(ResultSet["salary"]);
 
 
 				Teacher Newteacher = new Teacher();
@@ -114,8 +114,8 @@ namespace C__Cumulative_Part_1.Controllers
 				string teacherfname = ResultSet["teacherfname"].ToString();
 				string teacherlname = ResultSet["teacherlname"].ToString();
 				string employeenumber = ResultSet["employeenumber"].ToString();
-				string hiredate = ResultSet["hiredate"].ToString();
-				string salary = ResultSet["salary"].ToString();
+				DateTime hiredate = (DateTime)ResultSet["hiredate"];
+				decimal salary = Convert.ToDecimal(ResultSet["salary"]);
 
 
 				Newteacher.teacherid = teacherid;
@@ -200,6 +200,44 @@ namespace C__Cumulative_Part_1.Controllers
 
 		}
 
+		/// <summary>
+		/// Updates an Teacher on the MySQL Database. 
+		/// </summary>
+		/// <param name="TeacherInfo">An object with fields that map to the columns of the Teacher's table.</param>
+		/// <example>
+		/// POST api/TeacherData/UpdateTeacher/10 
+		/// FORM DATA / POST DATA / REQUEST BODY 
+		/// </example>
+		[HttpPost]
+		[EnableCors(origins: "*", methods: "*", headers: "*")]
+		public void UpdateTeacher(int teacherid, [FromBody] Teacher TeacherInfo)
+		{
+			//Create an instance of a connection
+			MySqlConnection Conn = http5125_school.AccessDatabase();
+
+			//Debug.WriteLine(TeacherInfo.teacherfname);
+
+			//Open the connection between the web server and database
+			Conn.Open();
+
+			//Establish a new command (query) for our database
+			MySqlCommand cmd = Conn.CreateCommand();
+
+			//SQL QUERY
+			cmd.CommandText = "update teachers set teacherfname=@teacherfname, teacherlname=@teacherlname, employeenumber=@employeenumber, hiredate=@hiredate, salary=@salary where teacherid=@teacherid";
+			cmd.Parameters.AddWithValue("@teacherfname", TeacherInfo.teacherfname);
+			cmd.Parameters.AddWithValue("@teacherlname", TeacherInfo.teacherlname);
+			cmd.Parameters.AddWithValue("@employeenumber", TeacherInfo.employeenumber);
+			cmd.Parameters.AddWithValue("@hiredate", TeacherInfo.hiredate);
+			cmd.Parameters.AddWithValue("@salary", TeacherInfo.salary);
+			cmd.Parameters.AddWithValue("@teacherid", teacherid);
+			cmd.Prepare();
+
+			cmd.ExecuteNonQuery();
+
+			Conn.Close();
+
+		}
 
 	}
 }

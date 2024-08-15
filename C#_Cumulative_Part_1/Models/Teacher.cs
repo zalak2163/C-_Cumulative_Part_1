@@ -12,8 +12,8 @@ namespace C__Cumulative_Part_1.Models
 		public string teacherfname;
 		public string teacherlname;
 		public string employeenumber;
-		public string hiredate;
-		public string salary;
+		public DateTime hiredate;
+		public decimal salary;
 
 		//parameter-less constructor function
 		public Teacher() { }
